@@ -6,6 +6,8 @@ let azkarNight = document.querySelector(".Azkar.Night");
 let theSpn = document.querySelectorAll("span")[0]; // first Num
 let theBtn = document.querySelectorAll("button")[2]; // secnd Num
 
+let timeNow = new Date();
+
 // -------------------------------------------------------- Numbers Of Azkar
 
 let allButtons = document.getElementsByClassName("smlNum"); // Buttons
@@ -29,6 +31,7 @@ for (let i = 0; i <= indexOfLastDayZekr + 1; i++) {
   let myFullNum = Number(allButtons[i].innerText.split("/")[1].trim()); // الرقم الكلي
 
   let getReadNum = window.localStorage.getItem(`Read Zekr ${i + 1}`);
+
   if (getReadNum) {
     myReadNum = Number(getReadNum);
     allSpans[i].innerText = myReadNum;
@@ -37,49 +40,15 @@ for (let i = 0; i <= indexOfLastDayZekr + 1; i++) {
       allButtonsArr[i].disabled = true;
       allButtonsArr[i].classList.add("deactive");
     }
-
-    // Reset Day Time
-    function resetDayTime() {
-      let theDateNow = new Date();
-      let dayTime = new Date();
-      dayTime.setHours(5, 0, 0, 0);
-      let nightTime = new Date();
-      nightTime.setHours(14, 50, 0, 0);
-
-      if (theDateNow > dayTime && theDateNow < nightTime) {
-        // window.localStorage.setItem("Azkar Day", azkarDay);
-
-        // -------------------
-        window.localStorage.removeItem("Azkar Night");
-        switchBtnNight.classList.add("deactive");
-        switchBtnDay.classList.remove("deactive");
-        azkarDay.style.display = "";
-        azkarNight.style.display = "none";
-
-        theHead.classList.remove("night");
-        theFoter.classList.remove("night");
-
-        allBoxDivs.forEach((box) => {
-          box.classList.remove("night");
-        });
-        window.localStorage.setItem("Azkar Day", "اذكار الصباح");
-        // -------------------
-
-        window.localStorage.removeItem(`Read Zekr ${i + 1}`);
-        window.location.reload();
-
-        console.log("Counter Reset Done👌");
-        console.log(`Reset At: ${theDateNow}`);
-      }
-    }
-
-    // let timeNow = new Date();
   }
 
   allButtonsArr[i].addEventListener("click", function () {
     if (myReadNum < myFullNum) {
       myReadNum++;
       allSpans[i].innerText = myReadNum; // تحديث رقم القراءة داخل span
+
+      // Add Date Value To Local Storage
+      // window.localStorage.setItem("Date", timeNow.getDate());
     }
 
     if (myReadNum === myFullNum) {
@@ -98,7 +67,6 @@ for (let i = 0; i <= indexOfLastDayZekr + 1; i++) {
 
     window.localStorage.setItem(`Read Zekr ${i + 1}`, myReadNum);
   });
-  setInterval(resetDayTime, 1000);
 }
 
 // --------------------------------------------------------------------------
@@ -117,52 +85,22 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
       allButtonsArr[n].disabled = true;
       allButtonsArr[n].classList.add("deactive");
     }
-
-    // Reset Night Time
-    function resetNightTime() {
-      let theDateNow = new Date();
-      let dayTime = new Date();
-      dayTime.setHours(5, 0, 0, 0);
-      let nightTime = new Date();
-      nightTime.setHours(14, 50, 0, 0);
-
-      if (theDateNow > nightTime || theDateNow < dayTime) {
-        // window.localStorage.setItem("Azkar Night");
-
-        // -------------
-        window.localStorage.removeItem("Azkar Day");
-        switchBtnDay.classList.add("deactive");
-        switchBtnNight.classList.remove("deactive");
-        azkarDay.style.display = "none";
-        azkarNight.style.display = "";
-
-        theHead.classList.add("night");
-        theFoter.classList.add("night");
-
-        allBoxDivs.forEach((box) => {
-          box.classList.add("night");
-        });
-        window.localStorage.setItem("Azkar Night", "اذكار المساء");
-        // -------------
-
-        window.localStorage.removeItem(`Read Zekr ${n + 1}`);
-        window.location.reload();
-
-        console.log("Counter Reset Done👌");
-        console.log(`Reset At: ${theDateNow}`);
-      }
-    }
   }
 
   allButtonsArr[n].addEventListener("click", function () {
     if (myReadNum < myFullNum) {
       myReadNum++;
       allSpans[n].innerText = myReadNum; // تحديث رقم القراءة داخل span
+
+      // Add Date Value To Local Storage
+      // window.localStorage.setItem("Date", timeNow.getDate());
     }
 
     if (myReadNum === myFullNum) {
       allButtonsArr[n].disabled = true;
       allButtonsArr[n].classList.add("deactive");
+
+      window.localStorage.setItem("Date", timeNow.getDate());
 
       if (allButtonsArr[n + 1]) {
         setTimeout(() => {
@@ -176,8 +114,6 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
 
     window.localStorage.setItem(`Read Zekr ${n + 1}`, myReadNum);
   });
-
-  setInterval(resetNightTime, 1000);
 }
 
 // -------------------------------------------------------- Numbers Of Azkar
@@ -186,9 +122,6 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
 
 // Day Button
 switchBtnDay.onclick = function () {
-  // switchBtnDay.style.backgroundColor = "rgb(14, 152, 14)";
-  // switchBtnNight.style.backgroundColor = "green";
-
   switchBtnNight.classList.add("deactive");
   switchBtnDay.classList.remove("deactive");
   azkarDay.style.display = "";
@@ -203,6 +136,9 @@ switchBtnDay.onclick = function () {
 
   window.localStorage.setItem("Azkar Day", "اذكار الصباح");
   window.localStorage.removeItem("Azkar Night");
+
+  // window.localStorage.setItem("Date", timeNow.getDate());
+  // console.log(Number(window.localStorage.getItem("Date")));
 };
 
 // Night Button
@@ -221,11 +157,14 @@ switchBtnNight.onclick = function () {
 
   window.localStorage.setItem("Azkar Night", "اذكار المساء");
   window.localStorage.removeItem("Azkar Day");
+
+  // window.localStorage.setItem("Date", timeNow.getDate());
+  // console.log(Number(window.localStorage.getItem("Date")));
 };
 
 // -------------------------------------------------------------------- Day & Night Btn
 
-// Reaload Window Default (Azkar Day) After Fajr Time
+// Onload Window Default (Azkar Day) After Fajr Time
 window.onload = function () {
   azkarDay.style.display = "";
   azkarNight.style.display = "none";
@@ -256,6 +195,36 @@ window.onload = function () {
     allBoxDivs.forEach((box) => {
       box.classList.add("night");
     });
+  }
+
+  if (window.localStorage.getItem("Date")) {
+    if (Number(window.localStorage.getItem("Date")) !== timeNow.getDate()) {
+      for (r = 0; r < allButtonsArr.length; r++) {
+        window.localStorage.removeItem(`Read Zekr ${r + 1}`);
+      }
+      window.localStorage.removeItem("Azkar Day");
+      window.localStorage.removeItem("Azkar Night");
+
+      // To Set Default Values of Azkar Read
+      if (window.localStorage.getItem("Page Is Ready")) {
+        console.log("Page Is Ready");
+      } else {
+        location.reload();
+        window.localStorage.setItem("Page Is Ready", "Done");
+      }
+
+      setTimeout(() => {
+        window.localStorage.removeItem("Page Is Ready");
+
+        // Add Date Value To Local Storage
+        window.localStorage.setItem("Date", timeNow.getDate());
+      }, 1000);
+    } else {
+      console.log("Same Date");
+    }
+  } else {
+    // Add Date Value To Local Storage For The First Time
+    window.localStorage.setItem("Date", timeNow.getDate());
   }
 };
 
