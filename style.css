@@ -122,7 +122,6 @@ body {
 /* Zekr Box */
 .box {
   color: white;
-  background-color: #00989a;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -141,7 +140,6 @@ body {
 
 .box.night {
   color: white;
-  background-color: #00989a;
   border-radius: 5px;
   display: flex;
   justify-content: center;
