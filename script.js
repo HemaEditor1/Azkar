@@ -7,6 +7,11 @@ let theSpn = document.querySelectorAll("span")[0]; // first Num
 let theBtn = document.querySelectorAll("button")[2]; // secnd Num
 
 let timeNow = new Date();
+let dayTime = new Date()
+dayTime.setHours(5, 0, 0, 0)
+
+let nightTime = new Date()
+nightTime.setHours(14, 0, 0, 0)
 
 // -------------------------------------------------------- Numbers Of Azkar
 
@@ -116,7 +121,7 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
   });
 }
 
-// -------------------------------------------------------- Numbers Of Azkar
+
 
 // -------------------------------------------------------------------- Day & Night Btn
 
@@ -197,6 +202,7 @@ window.onload = function () {
     });
   }
 
+  // Reset Values
   if (window.localStorage.getItem("Date")) {
     if (Number(window.localStorage.getItem("Date")) !== timeNow.getDate()) {
       for (r = 0; r < allButtonsArr.length; r++) {
@@ -225,6 +231,36 @@ window.onload = function () {
   } else {
     // Add Date Value To Local Storage For The First Time
     window.localStorage.setItem("Date", timeNow.getDate());
+  }
+
+
+  // Set TimeZone of Azkar
+  if (timeNow.getHours() <= dayTime.getHours || timeNow.getHours() >= nightTime.getHours()) {
+    window.localStorage.removeItem("Azkar Day")
+    window.localStorage.setItem("Azkar Night", "اذكار المساء")
+
+    if (window.localStorage.getItem("Azkar Is Ready")) {
+      console.log("Azkar Night Time")
+    } else {
+      location.reload()
+      window.localStorage.setItem("Azkar Is Ready", "Done")
+    }
+    setTimeout(() => {
+      window.localStorage.removeItem("Azkar Is Ready")
+    }, 500);
+  } else if (timeNow.getHours() > dayTime.getHours() && timeNow.getHours() < nightTime.getHours()) {
+    window.localStorage.removeItem("Azkar Night")
+    window.localStorage.setItem("Azkar Day", "اذكار الصباح")
+    
+    if (window.localStorage.getItem("Azkar Is Ready")) {
+      console.log("Azkar Day Time")
+    } else {
+      location.reload()
+      window.localStorage.setItem("Azkar Is Ready", "Done")
+    }
+    setTimeout(() => {
+      window.localStorage.removeItem("Azkar Is Ready")
+    }, 500);
   }
 };
 
