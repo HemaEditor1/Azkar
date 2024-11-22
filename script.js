@@ -7,11 +7,11 @@ let theSpn = document.querySelectorAll("span")[0]; // first Num
 let theBtn = document.querySelectorAll("button")[2]; // secnd Num
 
 let timeNow = new Date();
-let dayTime = new Date()
-dayTime.setHours(5, 0, 0, 0)
+let dayTime = new Date();
+dayTime.setHours(5, 0, 0, 0);
 
-let nightTime = new Date()
-nightTime.setHours(14, 0, 0, 0)
+let nightTime = new Date();
+nightTime.setHours(14, 40, 0, 0);
 
 // -------------------------------------------------------- Numbers Of Azkar
 
@@ -121,12 +121,9 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
   });
 }
 
+// -------------------------------------------------------------------- Day & Night Functions
 
-
-// -------------------------------------------------------------------- Day & Night Btn
-
-// Day Button
-switchBtnDay.onclick = function () {
+function dayAzkar() {
   switchBtnNight.classList.add("deactive");
   switchBtnDay.classList.remove("deactive");
   azkarDay.style.display = "";
@@ -141,13 +138,9 @@ switchBtnDay.onclick = function () {
 
   window.localStorage.setItem("Azkar Day", "اذكار الصباح");
   window.localStorage.removeItem("Azkar Night");
+}
 
-  // window.localStorage.setItem("Date", timeNow.getDate());
-  // console.log(Number(window.localStorage.getItem("Date")));
-};
-
-// Night Button
-switchBtnNight.onclick = function () {
+function nightAzkar() {
   switchBtnDay.classList.add("deactive");
   switchBtnNight.classList.remove("deactive");
   azkarDay.style.display = "none";
@@ -162,49 +155,42 @@ switchBtnNight.onclick = function () {
 
   window.localStorage.setItem("Azkar Night", "اذكار المساء");
   window.localStorage.removeItem("Azkar Day");
-
-  // window.localStorage.setItem("Date", timeNow.getDate());
-  // console.log(Number(window.localStorage.getItem("Date")));
-};
+}
 
 // -------------------------------------------------------------------- Day & Night Btn
 
+// Day Button
+switchBtnDay.onclick = function () {
+  dayAzkar();
+  window.localStorage.setItem("User Choice", "اذكار الصباح");
+  window.localStorage.removeItem("Azkar Night");
+  window.localStorage.setItem("Hours", timeNow.getHours());
+};
+
+// Night Button
+switchBtnNight.onclick = function () {
+  nightAzkar();
+  window.localStorage.setItem("User Choice", "اذكار المساء");
+  window.localStorage.setItem("Hours", timeNow.getHours());
+};
+
+// -------------------------------------------------------------------- Onload Window
+
 // Onload Window Default (Azkar Day) After Fajr Time
 window.onload = function () {
-  azkarDay.style.display = "";
-  azkarNight.style.display = "none";
-
-  if (window.localStorage.getItem("Azkar Day")) {
-    switchBtnNight.classList.add("deactive");
-    switchBtnDay.classList.remove("deactive");
-    azkarDay.style.display = "";
-    azkarNight.style.display = "none";
-
-    theHead.classList.remove("night");
-    theFoter.classList.remove("night");
-
-    allBoxDivs.forEach((box) => {
-      box.classList.remove("night");
-    });
+  // User Choice Remove Values
+  if (Number(window.localStorage.getItem("Hours")) !== timeNow.getHours()) {
+    window.localStorage.removeItem("User Choice");
+    window.localStorage.removeItem("Hours");
+  } else {
+    console.log("User Choice");
   }
 
-  if (window.localStorage.getItem("Azkar Night")) {
-    switchBtnDay.classList.add("deactive");
-    switchBtnNight.classList.remove("deactive");
-    azkarDay.style.display = "none";
-    azkarNight.style.display = "";
-
-    theHead.classList.add("night");
-    theFoter.classList.add("night");
-
-    allBoxDivs.forEach((box) => {
-      box.classList.add("night");
-    });
-  }
-
-  // Reset Values
+  // Reset Azkar Values
   if (window.localStorage.getItem("Date")) {
     if (Number(window.localStorage.getItem("Date")) !== timeNow.getDate()) {
+      window.localStorage.removeItem("User Choice");
+
       for (r = 0; r < allButtonsArr.length; r++) {
         window.localStorage.removeItem(`Read Zekr ${r + 1}`);
       }
@@ -233,34 +219,29 @@ window.onload = function () {
     window.localStorage.setItem("Date", timeNow.getDate());
   }
 
-
-  // Set TimeZone of Azkar
-  if (timeNow.getHours() <= dayTime.getHours || timeNow.getHours() >= nightTime.getHours()) {
-    window.localStorage.removeItem("Azkar Day")
-    window.localStorage.setItem("Azkar Night", "اذكار المساء")
-
-    if (window.localStorage.getItem("Azkar Is Ready")) {
-      console.log("Azkar Night Time")
-    } else {
-      location.reload()
-      window.localStorage.setItem("Azkar Is Ready", "Done")
+  // User Choice Callback Values
+  if (window.localStorage.getItem("User Choice")) {
+    if (window.localStorage.getItem("User Choice") === "اذكار الصباح") {
+      dayAzkar();
+    } else if (window.localStorage.getItem("User Choice") === "اذكار المساء") {
+      nightAzkar();
     }
-    setTimeout(() => {
-      window.localStorage.removeItem("Azkar Is Ready")
-    }, 500);
-  } else if (timeNow.getHours() > dayTime.getHours() && timeNow.getHours() < nightTime.getHours()) {
-    window.localStorage.removeItem("Azkar Night")
-    window.localStorage.setItem("Azkar Day", "اذكار الصباح")
-    
-    if (window.localStorage.getItem("Azkar Is Ready")) {
-      console.log("Azkar Day Time")
-    } else {
-      location.reload()
-      window.localStorage.setItem("Azkar Is Ready", "Done")
+  } else {
+    // Set TimeZone of Azkar
+    // Azkar Night
+    if (
+      timeNow.getHours() <= dayTime.getHours ||
+      timeNow.getHours() >= nightTime.getHours()
+    ) {
+      nightAzkar();
+
+      // Azkar Day
+    } else if (
+      timeNow.getHours() > dayTime.getHours() &&
+      timeNow.getHours() < nightTime.getHours()
+    ) {
+      dayAzkar();
     }
-    setTimeout(() => {
-      window.localStorage.removeItem("Azkar Is Ready")
-    }, 500);
   }
 };
 
