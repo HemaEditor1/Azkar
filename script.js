@@ -11,7 +11,18 @@ let dayTime = new Date();
 dayTime.setHours(5, 0, 0, 0);
 
 let nightTime = new Date();
-nightTime.setHours(15, 00, 0, 0);
+nightTime.setHours(14, 40, 0, 0);
+
+// ----------------------------------------------------------
+
+window.onload = function () {
+  addBlack();
+  setTimeout(() => {
+    closeBlack();
+  }, 2000);
+};
+
+// ----------------------------------------------------------
 
 // -------------------------------------------------------- Numbers Of Azkar
 
@@ -138,6 +149,8 @@ function dayAzkar() {
 
   window.localStorage.setItem("Azkar Day", "اذكار الصباح");
   window.localStorage.removeItem("Azkar Night");
+
+  menuElements.classList.remove("night");
 }
 
 function nightAzkar() {
@@ -155,6 +168,8 @@ function nightAzkar() {
 
   window.localStorage.setItem("Azkar Night", "اذكار المساء");
   window.localStorage.removeItem("Azkar Day");
+
+  menuElements.classList.add("night");
 }
 
 // -------------------------------------------------------------------- Day & Night Btn
@@ -255,3 +270,176 @@ yearParagraph.textContent = `Copyright © ${new Date().getFullYear()}`;
 myFooter.appendChild(yearParagraph);
 
 // ----------------------------------------------------------
+
+// Zekr Info
+let infoBtn = document.querySelectorAll(".infoBtn");
+let sourceHidden = document.querySelectorAll(".sourceHidden");
+let doneBtn = document.querySelectorAll(".doneBtn");
+
+for (let g = 0; g < infoBtn.length; g++) {
+  infoBtn[g].onclick = function () {
+    infoBtn[g].classList.toggle("deactive");
+    sourceHidden[g].classList.toggle("active");
+
+    setTimeout(() => {
+      doneBtn[g].classList.remove("deactive");
+    }, 300);
+  };
+
+  doneBtn[g].onclick = function () {
+    infoBtn[g].classList.toggle("deactive");
+    sourceHidden[g].classList.toggle("active");
+    doneBtn[g].classList.add("deactive");
+  };
+}
+
+// -------------------------------------------------------------------------- FUNCTIONS
+// Menu Functions
+
+// Open Menu Elements
+function openMenuElements() {
+  menuElements.classList.add("show");
+  menuElementsBtn.classList.add("close");
+  menuElementsBtnX.classList.add("show");
+}
+
+// Close Menu Elements
+function closeMenuElements() {
+  menuElements.classList.remove("show");
+  menuElementsBtn.classList.remove("close");
+  menuElementsBtnX.classList.remove("show");
+}
+
+// Open Info Elements
+function openInfoMenu() {
+  infoElements.classList.add("show");
+  infoElementsBtn.classList.add("close");
+  infoElementsBtnX.classList.add("show");
+}
+
+// Close Info Elements
+function closeInfoMenu() {
+  infoElements.classList.remove("show");
+  infoElementsBtn.classList.remove("close");
+  infoElementsBtnX.classList.remove("show");
+}
+
+// Add Black Mate
+function addBlack() {
+  blackMate.classList.remove("close");
+}
+
+// Close Black Mate
+function closeBlack() {
+  blackMate.classList.add("close");
+}
+
+// -------------------------------------------------------------------------- FUNCTIONS
+
+// Right Menu
+let menuElementsBtn = document.querySelector(".menuElementsBtn"); // زر القائمة
+let menuElements = document.querySelector(".menuElements"); // القائمة
+let menuElementsBtnX = document.querySelector(".menuElementsBtnX");
+
+// Left Menu
+let infoElementsBtn = document.querySelector(".infoElementsBtn");
+let infoElementsBtnX = document.querySelector(".infoElementsBtnX");
+let infoElements = document.querySelector(".infoElements");
+
+let blackMate = document.querySelector(".blackMate");
+
+menuElementsBtn.addEventListener("click", () => {
+  // Close Info Menu
+  if (infoElements.classList.contains("show")) {
+    closeInfoMenu();
+  }
+
+  // Open Elements Menu
+  openMenuElements();
+  addBlack();
+});
+
+// Close Elements Menu By X Btn
+menuElementsBtnX.addEventListener("click", () => {
+  closeMenuElements();
+  closeBlack();
+});
+
+infoElementsBtn.addEventListener("click", () => {
+  // Close Elements Menu
+  if (menuElements.classList.contains("show")) {
+    closeMenuElements();
+  }
+
+  // Open Info Menu
+  openInfoMenu();
+  addBlack();
+});
+
+// Close Info Menu By X Btn
+infoElementsBtnX.addEventListener("click", () => {
+  closeInfoMenu();
+  closeBlack();
+});
+
+// Close Info Menu If Click Out This Menu
+window.addEventListener("click", (e) => {
+  if (infoElements.classList.contains("show")) {
+    if (
+      !infoElements.contains(e.target) &&
+      !infoElementsBtn.contains(e.target)
+    ) {
+      closeInfoMenu();
+      closeBlack();
+    }
+  }
+});
+
+// Close Elements Menu If Click Out This Menu
+window.addEventListener("click", (el) => {
+  if (menuElements.classList.contains("show")) {
+    if (
+      !menuElements.contains(el.target) &&
+      !menuElementsBtn.contains(el.target)
+    ) {
+      closeMenuElements();
+      closeBlack();
+    }
+  }
+});
+
+// Close If Scroll
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= 400) {
+    if (menuElements.classList.contains("show")) {
+      closeMenuElements();
+      closeBlack();
+    }
+  }
+
+  if (window.scrollY >= 500) {
+    if (infoElements.classList.contains("show")) {
+      closeInfoMenu();
+      closeBlack();
+    }
+  }
+});
+
+// ------------------------------------
+
+// --------------------- Alert
+let getLink = document.querySelector(".getLink");
+let alertMsg = document.querySelector(".alert");
+
+getLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  let siteLink = window.location.href;
+
+  navigator.clipboard.writeText(siteLink); // Copy Site Link
+
+  alertMsg.classList.remove("close");
+  setTimeout(() => {
+    alertMsg.classList.add("close");
+  }, 5000);
+});
+// --------------------- Alert
