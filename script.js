@@ -11,7 +11,7 @@ let dayTime = new Date();
 dayTime.setHours(5, 0, 0, 0);
 
 let nightTime = new Date();
-nightTime.setHours(14, 40, 0, 0);
+nightTime.setHours(15, 15, 0, 0);
 
 // ----------------------------------------------------------
 
