@@ -8,10 +8,10 @@ let theBtn = document.querySelectorAll("button")[2]; // secnd Num
 
 let timeNow = new Date();
 let dayTime = new Date();
-dayTime.setHours(5, 0, 0, 0);
+dayTime.setHours(4, 0, 0, 0);
 
 let nightTime = new Date();
-nightTime.setHours(15, 15, 0, 0);
+nightTime.setHours(16, 15, 0, 0);
 
 // ----------------------------------------------------------
 
