@@ -3,8 +3,8 @@ let switchBtnNight = document.querySelector(".theSwitshBtnNight");
 let azkarDay = document.querySelector(".Azkar.Day");
 let azkarNight = document.querySelector(".Azkar.Night");
 
-let theSpn = document.querySelectorAll("span")[0]; // first Num
-let theBtn = document.querySelectorAll("button")[2]; // secnd Num
+// let theSpn = document.querySelectorAll("span")[0]; // first Num
+// let theBtn = document.querySelectorAll("button")[2]; // secnd Num
 
 let timeNow = new Date();
 let dayTime = new Date();
@@ -13,7 +13,14 @@ dayTime.setHours(4, 0, 0, 0);
 let nightTime = new Date();
 nightTime.setHours(16, 15, 0, 0);
 
-// -----------------------------------------------------------
+// Azkar Last Page
+let moreZekr = document.getElementsByClassName("moreAzkar")
+let moreZekrArr = [...moreZekr]
+let textForMoreAzkar = document.querySelector(".knowMoreAzkar")
+let index = timeNow.getDate() % moreZekrArr.length;
+let moreAzkarLastPage = `هل تعرف <a href="${moreZekrArr[index].href}">${moreZekrArr[index].innerHTML}</a> ؟`
+
+// ----------------------------------------------------------
 
 window.onload = function () {
   addBlack();
@@ -22,14 +29,14 @@ window.onload = function () {
   }, 2000);
 };
 
-// -----------------------------------------------------------
+// ----------------------------------------------------------
 
 // -------------------------------------------------------- Numbers Of Azkar
 
 let allButtons = document.getElementsByClassName("smlNum"); // Buttons
 let allButtonsArr = [...allButtons];
 let allSpans = document.querySelectorAll("span"); // Spans
-
+let allSpansArr = [...allSpans];
 let lastDayZekr = document.getElementById("last1"); // Last Zekr At Morning
 let indexOfLastDayZekr = allButtonsArr.indexOf(lastDayZekr); // Number Of Index
 
@@ -40,6 +47,7 @@ let allBoxDivs = document.querySelectorAll(".box"); // Boxs
 
 let theHead = document.querySelector(".header"); // Header
 let theFoter = document.querySelector(".footer"); // Footer
+
 
 // Day Azkar
 for (let i = 0; i <= indexOfLastDayZekr + 1; i++) {
@@ -55,6 +63,7 @@ for (let i = 0; i <= indexOfLastDayZekr + 1; i++) {
     if (myReadNum === myFullNum) {
       allButtonsArr[i].disabled = true;
       allButtonsArr[i].classList.add("deactive");
+      allSpansArr[i].classList.add("deactive");
     }
   }
 
@@ -63,13 +72,12 @@ for (let i = 0; i <= indexOfLastDayZekr + 1; i++) {
       myReadNum++;
       allSpans[i].innerText = myReadNum; // تحديث رقم القراءة داخل span
 
-      // Add Date Value To Local Storage
-      // window.localStorage.setItem("Date", timeNow.getDate());
     }
 
     if (myReadNum === myFullNum) {
       allButtonsArr[i].disabled = true;
       allButtonsArr[i].classList.add("deactive");
+      allSpansArr[i].classList.add("deactive");
 
       if (allButtonsArr[i + 1]) {
         setTimeout(() => {
@@ -100,6 +108,7 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
     if (myReadNum === myFullNum) {
       allButtonsArr[n].disabled = true;
       allButtonsArr[n].classList.add("deactive");
+      allSpansArr[n].classList.add("deactive");
     }
   }
 
@@ -108,13 +117,12 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
       myReadNum++;
       allSpans[n].innerText = myReadNum; // تحديث رقم القراءة داخل span
 
-      // Add Date Value To Local Storage
-      // window.localStorage.setItem("Date", timeNow.getDate());
     }
 
     if (myReadNum === myFullNum) {
       allButtonsArr[n].disabled = true;
       allButtonsArr[n].classList.add("deactive");
+      allSpansArr[n].classList.add("deactive");
 
       window.localStorage.setItem("Date", timeNow.getDate());
 
@@ -134,7 +142,17 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
 
 // -------------------------------------------------------------------- Day & Night Functions
 
+let downBtn = document.querySelector(".downBtn")
+let upBtn = document.querySelector(".upBtn")
+let linksMoreZekr = document.querySelector(".linksMoreZekr")
+
 function dayAzkar() {
+  downBtn.classList.remove("night")
+  upBtn.classList.remove("night")
+  linksMoreZekr.classList.remove("night")
+  downBtn.classList.add("day")
+  upBtn.classList.add("day")
+  linksMoreZekr.classList.add("day")
   switchBtnNight.classList.add("deactive");
   switchBtnDay.classList.remove("deactive");
   azkarDay.style.display = "";
@@ -154,6 +172,12 @@ function dayAzkar() {
 }
 
 function nightAzkar() {
+  downBtn.classList.remove("day")
+  upBtn.classList.remove("day")
+  linksMoreZekr.classList.remove("day")
+  downBtn.classList.add("night")
+  upBtn.classList.add("night")
+  linksMoreZekr.classList.add("night")
   switchBtnDay.classList.add("deactive");
   switchBtnNight.classList.remove("deactive");
   azkarDay.style.display = "none";
@@ -220,6 +244,10 @@ window.onload = function () {
         window.localStorage.setItem("Page Is Ready", "Done");
       }
 
+
+        // اعرض اللينك
+        textForMoreAzkar.innerHTML = moreAzkarLastPage
+
       setTimeout(() => {
         window.localStorage.removeItem("Page Is Ready");
 
@@ -228,10 +256,15 @@ window.onload = function () {
       }, 1000);
     } else {
       console.log("Same Date");
+
+        // اعرض اللينك
+        textForMoreAzkar.innerHTML = moreAzkarLastPage
+
     }
   } else {
     // Add Date Value To Local Storage For The First Time
     window.localStorage.setItem("Date", timeNow.getDate());
+    
   }
 
   // User Choice Callback Values
@@ -415,6 +448,18 @@ window.addEventListener("click", (el) => {
       closeBlack();
     }
   }
+
+  
+if (linksMoreZekr.classList.contains("active")) {
+  if (!theHead.contains(el.target) &&
+      !downBtn.contains(el.target) &&
+      !upBtn.contains(el.target)){
+          downBtn.classList.remove("deactive")
+          linksMoreZekr.classList.remove("active")
+          upBtn.classList.remove("active")
+  }
+}
+  
 });
 
 // Close If Scroll
@@ -452,3 +497,21 @@ getLink.addEventListener("click", (e) => {
   }, 5000);
 });
 // --------------------- Alert
+
+
+
+downBtn.addEventListener("click", () => {
+  downBtn.classList.add("deactive")
+  linksMoreZekr.classList.add("active")
+  upBtn.classList.add("active")
+})
+
+upBtn.addEventListener("click", () => {
+  downBtn.classList.remove("deactive")
+  linksMoreZekr.classList.remove("active")
+  upBtn.classList.remove("active")
+})
+
+
+// ----------------------------------------------------
+

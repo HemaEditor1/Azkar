@@ -18,6 +18,15 @@ for (let g = 0; g < infoBtn.length; g++) {
     sourceHidden[g].classList.toggle("active");
     doneBtn[g].classList.add("deactive");
   };
+
+    // Close Info When Clicked On Anywhere On Site
+  window.addEventListener("click", (e) => {
+    if (e.target !== doneBtn[g] && e.target !== infoBtn[g]) {
+      infoBtn[g].classList.remove("deactive");
+      sourceHidden[g].classList.remove("active");
+      doneBtn[g].classList.add("deactive");
+    }
+  })
 }
 
 // ------------------------------------------------------------- FUNCTIONS
@@ -77,3 +86,7 @@ let yearParagraph = document.createElement("h3");
 
 yearParagraph.textContent = `Copyright © ${new Date().getFullYear()}`;
 myFooter.appendChild(yearParagraph);
+
+// ----------------------------------------------------------
+
+

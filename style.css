@@ -28,17 +28,19 @@ body {
 }
 
 .header {
-  background-image: url(Elements/Background/bk\ -\ h&f.png);
+  display: flex;
+  justify-content: center;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  background-image: url(Elements/Background/bk\ -\ h&f.png);
   width: 100%;
-  display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: center;
   z-index: 5;
+  transition: 0.3s ease;
+  padding-bottom: 0;
 }
 
 .blackMate {
@@ -59,28 +61,140 @@ body {
   z-index: -1;
 }
 
-.linksMoreZekr {
+.logoImg img {
+  cursor: pointer;
+}
+
+.downBtn {
   display: flex;
-  flex-wrap: nowrap;
   justify-content: center;
-  gap: 100px;
-  margin-bottom: 1rem;
+  width: fit-content;
+  margin: auto;
+  opacity: 1;
+  transform: translateY(0%);
+  transition: 0.5s ease;
+}
+
+.downBtn.deactive {
+  opacity: 0;
+  transform: translateY(-400%);
+}
+
+.downBtn a {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  animation: pulse 1.5s infinite ease-in-out; /* تكبير/تصغير مستمر */
+  display: inline-block; /* مهم عشان الـ transform يشتغل صح */
+}
+
+.downBtn a i {
+  font-size: 2rem;
+}
+.downBtn a:hover {
+  transform: scale(1.4);
+  animation: none;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+
+
+.upBtn {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin: auto;
+  transform: translateY(-400%);
+  opacity: 0;
+  margin-top: 3.3vh;
+  transition: 0.5s ease;
+}
+
+.upBtn.active {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.upBtn a {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.upBtn a i {
+  font-size: 2rem;
+}
+.upBtn a:hover {
+  transform: scale(1.35);
+}
+
+
+/* -------------------------------------------------------------------------------------- */
+.divOfMoreZekr {
+  display: flex;
+  flex-direction: column;
+  position: relative;
   width: 100%;
 }
 
+.linksMoreZekr {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  gap: 10vw;
+  transition: 0.6s ease;
+  transform: translateY(-1000%);
+}
+
+
+.linksMoreZekr.day {
+  background-image: url(Elements/Background/bk\ -\ h&f.png);
+}
+
+.linksMoreZekr.night {
+  background-image: url(Elements/Background/bk\ -\ h&f\ -\ night.png);
+}
+
+
+.linksMoreZekr.active {
+  transform: translateY(0%);
+}
+
 .linksMoreZekr a {
-  font-size: 0.9rem;
-  text-decoration: none;
   color: white;
-  padding: 5px 15px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 2vh;
   transition: 0.3s ease;
-  border: 2px solid transparent;
 }
 
 .linksMoreZekr a:hover {
-  text-decoration: underline;
-  text-underline-offset: 10px;
+  transform: scale(1.13);
 }
+
+.downBtn.day a {
+  color: #256358;
+}
+
+.downBtn.night a {
+  color: #214e69;
+}
+
+.upBtn.day a {
+  color: #256358;
+}
+
+.upBtn.night a {
+  color: #214e69;
+}
+
 
 .header img {
   width: 30%;
@@ -96,6 +210,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
+  transition: 0.3s ease;
 }
 
 .text {
@@ -110,11 +225,11 @@ body {
 }
 
 .text h4 {
-  margin-top: -4vh;
+  margin-top: -3.3vh;
 }
 
 .text h5 {
-  margin-top: 3vh;
+  margin-top: 2.2vh;
 }
 
 /* Buttons */
@@ -131,7 +246,7 @@ body {
   border-radius: 5px;
   background-image: url(Elements/Background/bk\ -\ btn.png);
   background-repeat: no-repeat;
-  transition: 0.2s ease;
+  transition: 0.3s ease;
   cursor: pointer;
 }
 
@@ -155,7 +270,7 @@ body {
   border-radius: 5px;
   background-image: url(Elements/Background/bk\ -\ btn\ -\ night.png);
   background-repeat: no-repeat;
-  transition: 0.2s ease;
+  transition: 0.3s ease;
   cursor: pointer;
 }
 
@@ -184,6 +299,7 @@ body {
   margin: 10vh;
   background-image: url(Elements/Background/bk\ -\ box.png);
   font-size: 1.3rem;
+  transition: 0.3s ease;
 }
 
 .box.night {
@@ -198,6 +314,7 @@ body {
   margin: 10vh;
   background-image: url(Elements/Background/bk\ -\ box\ -\ night.png);
   font-size: 1.3rem;
+  transition: 0.3s ease;
 }
 
 .smlNum {
@@ -205,16 +322,17 @@ body {
   border-radius: 5px;
   border: solid white 2px;
   color: white;
-  font-size: 1.9rem;
+  font-size: 2rem;
   align-items: center;
-  width: 10vw;
-  height: 11vh;
-  transition: 0.2s ease;
+  width: 8vw;
+  height: 9vh;
+  transition: 0.3s ease;
   cursor: pointer;
+  font-size: 1.9rem;
 }
 
 .smlNum:hover {
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.07);
 }
 
 .smlNum.deactive {
@@ -222,17 +340,23 @@ body {
   border-radius: 5px;
   border: solid rgba(255, 255, 255, 0.674) 2px;
   color: rgba(255, 255, 255, 0.674);
-  font-size: 1.5rem;
   align-items: center;
-  width: 10vw;
-  height: 11vh;
-  transition: 0.2s ease;
+  width: 6vw;
+  height: 7vh;
+  transition: 0.3s ease;
   cursor: default;
+  font-size: 1.5rem;
 }
 
 span {
-  font-size: 3rem;
+  font-size: 2.9rem;
+  transition: 0.3s ease;
 }
+
+span.deactive {
+  font-size: 2rem;
+}
+
 
 .zekr {
   display: flex;
@@ -249,7 +373,12 @@ span {
   align-items: center;
   flex-direction: column;
   font-size: 1.5rem;
-  margin-bottom: 10vh;
+  margin-bottom: 2vh;
+}
+
+.knowMoreAzkar {
+font-size: 1.5rem;
+margin-bottom: 10vh;
 }
 
 .footer {
@@ -491,6 +620,7 @@ span {
   color: white;
 }
 
+
 /* ------------------- New Header Mobile -------------------- */
 
 .mobHeader {
@@ -560,17 +690,17 @@ span {
 }
 
 .alert {
+  display: flex;
+  position: fixed;
   background-color: white;
+  align-items: center;
+  justify-content: center;
   color: #256358;
   font-size: 1.2rem;
   height: 50px;
-  display: flex;
   border-radius: 5px;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
-  position: fixed;
+  width: 70%;
   top: 1.4%;
   transform: translateY(0%);
   transition: 0.2s ease;
@@ -607,7 +737,7 @@ span {
     opacity: 1;
   }
 
-  .linksMoreZekr {
+  .divOfMoreZekr {
     display: none;
   }
 
@@ -729,6 +859,10 @@ span {
     font-size: 1rem;
   }
 
+  .knowMoreAzkar {
+    font-size: 1rem;
+  }
+
   .footer h2 {
     font-size: 1rem;
   }
@@ -751,7 +885,7 @@ span {
     opacity: 1;
   }
 
-  .linksMoreZekr {
+  .divOfMoreZekr {
     display: none;
   }
 
