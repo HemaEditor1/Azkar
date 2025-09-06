@@ -3,15 +3,13 @@ let switchBtnNight = document.querySelector(".theSwitshBtnNight");
 let azkarDay = document.querySelector(".Azkar.Day");
 let azkarNight = document.querySelector(".Azkar.Night");
 
-// let theSpn = document.querySelectorAll("span")[0]; // first Num
-// let theBtn = document.querySelectorAll("button")[2]; // secnd Num
 
 let timeNow = new Date();
 let dayTime = new Date();
-dayTime.setHours(4, 0, 0, 0);
+dayTime.setHours(5, 0, 0, 0);
 
 let nightTime = new Date();
-nightTime.setHours(16, 15, 0, 0);
+nightTime.setHours(16, 30, 0, 0);
 
 // Azkar Last Page
 let moreZekr = document.getElementsByClassName("moreAzkar")
