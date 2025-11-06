@@ -329,7 +329,7 @@ body {
   height: 7vh;
   transition: 0.3s ease;
   cursor: default;
-  font-size: 1.5rem;
+  font-size: 0rem;
 }
 
 span {
@@ -338,7 +338,7 @@ span {
 }
 
 span.deactive {
-  font-size: 2rem;
+  font-size: 2.3rem;
 }
 
 .zekr {
@@ -775,17 +775,16 @@ span.deactive {
   .smlNum {
     width: 110px;
     height: 60px;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .smlNum.deactive {
     width: 90px;
     height: 55px;
-    font-size: 1rem;
   }
 
   span {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   /* ------------------------------ */
@@ -933,13 +932,13 @@ span.deactive {
   .smlNum {
     width: 110px;
     height: 60px;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .smlNum.deactive {
     width: 90px;
     height: 55px;
-    font-size: 0.9rem;
+    font-size: 0rem;
   }
 
   span {
