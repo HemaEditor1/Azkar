@@ -187,7 +187,7 @@ body {
 }
 
 .zekr {
-  margin: 0vh 20vh;
+  margin: 0vh 2vh;
 }
 
 .zekr h4 {
@@ -414,7 +414,6 @@ body {
   .smlNum.deactive {
     width: 90px;
     height: 55px;
-    font-size: 0.7rem;
   }
 
   span {
@@ -471,15 +470,15 @@ body {
   }
 
   .textBFooter h4 {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .footer h2 {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .footer h3 {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -606,17 +605,13 @@ body {
     margin-bottom: 8vh;
   }
 
-  .zekr h2 {
-    font-size: 2rem;
-    margin-top: -0.5vh;
-  }
-
   .zekr h4 {
     font-size: 0.8rem;
   }
 
   .zekr h2 {
     font-size: 1.6rem;
+    margin-top: -0.5vh;
   }
 
   .textBFooter h4 {
