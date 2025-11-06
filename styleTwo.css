@@ -381,7 +381,7 @@ body {
 
   .text {
     position: relative;
-    width: 90%;
+    width: 85%;
   }
 
   .text h4 {
@@ -394,12 +394,13 @@ body {
   }
 
   .secName h2 {
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 1.3rem;
+    font-weight: 550;
   }
 
   .secName h3 {
-    margin-top: -4vh;
+    font-size: 0.9rem;
+    margin-top: -3vh;
     margin-bottom: 1vh;
     font-weight: 500;
   }
