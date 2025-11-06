@@ -184,11 +184,10 @@ body {
   margin: -1vh;
   margin-bottom: 10vh;
   background-image: url(Elements/Background/bk\ -\ box.png);
-  font-size: 1.3rem;
 }
 
 .zekr {
-  margin: 0vh 3vh;
+  margin: 0vh 20vh;
 }
 
 .zekr h4 {
@@ -197,7 +196,7 @@ body {
 }
 
 .zekr h2 {
-  font-size: 2.7rem;
+  font-size: 2.2rem;
   font-weight: 700;
 }
 
@@ -214,7 +213,6 @@ body {
   right: 50%; /* لجعل الزر في المنتصف أفقيًا */
   transform: translateX(50%); /* لضبط التمركز بدقة */
 }
-
 
 .infoBtn.deactive {
   opacity: 0;
@@ -434,7 +432,7 @@ body {
 
   .sourceHidden {
     font-weight: 400;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -442,7 +440,7 @@ body {
 
   .sourceHidden.active {
     font-weight: 400;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -467,7 +465,7 @@ body {
   }
 
   .zekr h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: -0.5vh;
   }
 
