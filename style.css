@@ -28,19 +28,23 @@ body {
 }
 
 .header {
+  background-image: url(Elements/Background/bk\ -\ h&f.png);
   display: flex;
   justify-content: center;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  background-image: url(Elements/Background/bk\ -\ h&f.png);
   width: 100%;
   flex-direction: column;
   text-align: center;
   z-index: 5;
   transition: 0.3s ease;
   padding-bottom: 0;
+}
+
+.header.night {
+  background-image: url(Elements/Background/bk\ -\ h&f\ -\ night.png);
 }
 
 .blackMate {
@@ -201,18 +205,6 @@ body {
   margin: 4vh;
 }
 
-.header.night {
-  background-image: url(Elements/Background/bk\ -\ h&f\ -\ night.png);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  transition: 0.3s ease;
-}
-
 .text {
   position: relative;
   width: 80%;
@@ -298,23 +290,15 @@ body {
   height: 80vh;
   margin: 10vh;
   background-image: url(Elements/Background/bk\ -\ box.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-size: 1.3rem;
   transition: 0.3s ease;
 }
 
 .box.night {
-  color: white;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
-  height: 80vh;
-  margin: 10vh;
   background-image: url(Elements/Background/bk\ -\ box\ -\ night.png);
-  font-size: 1.3rem;
-  transition: 0.3s ease;
 }
 
 .smlNum {
@@ -830,19 +814,10 @@ span.deactive {
   .doneBtn {
     font-size: 1rem;
   }
-
   /* ------------------------------ */
 
   .box {
     height: 570px;
-    width: 330px;
-    justify-content: center;
-    margin: 0;
-    margin-top: 4vh;
-  }
-
-  .Azkar.Night .box {
-    height: 600px;
     width: 330px;
     justify-content: center;
     margin: 0;
