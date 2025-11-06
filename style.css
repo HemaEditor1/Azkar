@@ -732,12 +732,12 @@ span.deactive {
 
   .text {
     position: relative;
-    width: 90%;
+    width: 85%;
     margin: 2vh 0px;
   }
 
   .text h4 {
-    font-size: 0.9rem;
+    font-size: 0.67rem;
     font-weight: 800;
     margin-bottom: 4vh;
   }
@@ -745,7 +745,7 @@ span.deactive {
   .text h5 {
     font-weight: 700;
     margin-bottom: 5vh;
-    font-size: 0.66rem;
+    font-size: 0.6rem;
   }
 
   .theSwitshBtnDay {
