@@ -3,6 +3,9 @@ let switchBtnNight = document.querySelector(".theSwitshBtnNight");
 let azkarDay = document.querySelector(".Azkar.Day");
 let azkarNight = document.querySelector(".Azkar.Night");
 
+setTimeout(() => {
+  closeWhiteBoard();
+}, 1000);
 
 let timeNow = new Date();
 let dayTime = new Date();
@@ -12,24 +15,13 @@ let nightTime = new Date();
 nightTime.setHours(16, 30, 0, 0);
 
 // Azkar Last Page
-let moreZekr = document.getElementsByClassName("moreAzkar")
-let moreZekrArr = [...moreZekr]
-let textForMoreAzkar = document.querySelector(".knowMoreAzkar")
+let moreZekr = document.getElementsByClassName("moreAzkar");
+let moreZekrArr = [...moreZekr];
+let textForMoreAzkar = document.querySelector(".knowMoreAzkar");
 let index = timeNow.getDate() % moreZekrArr.length;
-let moreAzkarLastPage = `هل تعرف <a href="${moreZekrArr[index].href}">${moreZekrArr[index].innerHTML}</a> ؟`
+let moreAzkarLastPage = `هل تعرف <a href="${moreZekrArr[index].href}">${moreZekrArr[index].innerHTML}</a> ؟`;
 
 // ----------------------------------------------------------
-
-window.onload = function () {
-  addBlack();
-  setTimeout(() => {
-    closeBlack();
-  }, 2000);
-};
-
-setTimeout(() => {
-  closeWhiteBoard()
-}, 1000);
 
 // ----------------------------------------------------------
 
@@ -49,7 +41,6 @@ let allBoxDivs = document.querySelectorAll(".box"); // Boxs
 
 let theHead = document.querySelector(".header"); // Header
 let theFoter = document.querySelector(".footer"); // Footer
-
 
 // Day Azkar
 for (let i = 0; i <= indexOfLastDayZekr + 1; i++) {
@@ -73,7 +64,6 @@ for (let i = 0; i <= indexOfLastDayZekr + 1; i++) {
     if (myReadNum < myFullNum) {
       myReadNum++;
       allSpans[i].innerText = myReadNum; // تحديث رقم القراءة داخل span
-
     }
 
     if (myReadNum === myFullNum) {
@@ -118,7 +108,6 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
     if (myReadNum < myFullNum) {
       myReadNum++;
       allSpans[n].innerText = myReadNum; // تحديث رقم القراءة داخل span
-
     }
 
     if (myReadNum === myFullNum) {
@@ -144,22 +133,22 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
 
 // -------------------------------------------------------------------- Day & Night Functions
 
-let downBtn = document.querySelector(".downBtn")
-let upBtn = document.querySelector(".upBtn")
-let linksMoreZekr = document.querySelector(".linksMoreZekr")
-let whiteBoard = document.querySelector(".whiteBoard")
+let downBtn = document.querySelector(".downBtn");
+let upBtn = document.querySelector(".upBtn");
+let linksMoreZekr = document.querySelector(".linksMoreZekr");
+let whiteBoard = document.querySelector(".whiteBoard");
 
 function closeWhiteBoard() {
-  whiteBoard.classList.add("close")
+  whiteBoard.classList.add("close");
 }
 
 function dayAzkar() {
-  downBtn.classList.remove("night")
-  upBtn.classList.remove("night")
-  linksMoreZekr.classList.remove("night")
-  downBtn.classList.add("day")
-  upBtn.classList.add("day")
-  linksMoreZekr.classList.add("day")
+  downBtn.classList.remove("night");
+  upBtn.classList.remove("night");
+  linksMoreZekr.classList.remove("night");
+  downBtn.classList.add("day");
+  upBtn.classList.add("day");
+  linksMoreZekr.classList.add("day");
   switchBtnNight.classList.add("deactive");
   switchBtnDay.classList.remove("deactive");
   azkarDay.style.display = "";
@@ -179,12 +168,12 @@ function dayAzkar() {
 }
 
 function nightAzkar() {
-  downBtn.classList.remove("day")
-  upBtn.classList.remove("day")
-  linksMoreZekr.classList.remove("day")
-  downBtn.classList.add("night")
-  upBtn.classList.add("night")
-  linksMoreZekr.classList.add("night")
+  downBtn.classList.remove("day");
+  upBtn.classList.remove("day");
+  linksMoreZekr.classList.remove("day");
+  downBtn.classList.add("night");
+  upBtn.classList.add("night");
+  linksMoreZekr.classList.add("night");
   switchBtnDay.classList.add("deactive");
   switchBtnNight.classList.remove("deactive");
   azkarDay.style.display = "none";
@@ -222,6 +211,13 @@ switchBtnNight.onclick = function () {
 
 // -------------------------------------------------------------------- Onload Window
 
+// window.onload = function () {
+//   addBlack();
+//   setTimeout(() => {
+//     closeBlack();
+//   }, 2000);
+// };
+
 // Onload Window Default (Azkar Day) After Fajr Time
 window.onload = function () {
   // User Choice Remove Values
@@ -251,9 +247,8 @@ window.onload = function () {
         window.localStorage.setItem("Page Is Ready", "Done");
       }
 
-
-        // اعرض اللينك
-        textForMoreAzkar.innerHTML = moreAzkarLastPage
+      // اعرض اللينك
+      textForMoreAzkar.innerHTML = moreAzkarLastPage;
 
       setTimeout(() => {
         window.localStorage.removeItem("Page Is Ready");
@@ -264,14 +259,12 @@ window.onload = function () {
     } else {
       console.log("Same Date");
 
-        // اعرض اللينك
-        textForMoreAzkar.innerHTML = moreAzkarLastPage
-
+      // اعرض اللينك
+      textForMoreAzkar.innerHTML = moreAzkarLastPage;
     }
   } else {
     // Add Date Value To Local Storage For The First Time
     window.localStorage.setItem("Date", timeNow.getDate());
-    
   }
 
   // User Choice Callback Values
@@ -339,7 +332,7 @@ for (let g = 0; g < infoBtn.length; g++) {
       sourceHidden[g].classList.remove("active");
       doneBtn[g].classList.add("deactive");
     }
-  })
+  });
 }
 
 // -------------------------------------------------------------------------- MENU FUNCTIONS
@@ -456,17 +449,17 @@ window.addEventListener("click", (el) => {
     }
   }
 
-  
-if (linksMoreZekr.classList.contains("active")) {
-  if (!theHead.contains(el.target) &&
+  if (linksMoreZekr.classList.contains("active")) {
+    if (
+      !theHead.contains(el.target) &&
       !downBtn.contains(el.target) &&
-      !upBtn.contains(el.target)){
-          downBtn.classList.remove("deactive")
-          linksMoreZekr.classList.remove("active")
-          upBtn.classList.remove("active")
+      !upBtn.contains(el.target)
+    ) {
+      downBtn.classList.remove("deactive");
+      linksMoreZekr.classList.remove("active");
+      upBtn.classList.remove("active");
+    }
   }
-}
-  
 });
 
 // Close If Scroll
@@ -505,20 +498,16 @@ getLink.addEventListener("click", (e) => {
 });
 // --------------------- Alert
 
-
-
 downBtn.addEventListener("click", () => {
-  downBtn.classList.add("deactive")
-  linksMoreZekr.classList.add("active")
-  upBtn.classList.add("active")
-})
+  downBtn.classList.add("deactive");
+  linksMoreZekr.classList.add("active");
+  upBtn.classList.add("active");
+});
 
 upBtn.addEventListener("click", () => {
-  downBtn.classList.remove("deactive")
-  linksMoreZekr.classList.remove("active")
-  upBtn.classList.remove("active")
-})
-
+  downBtn.classList.remove("deactive");
+  linksMoreZekr.classList.remove("active");
+  upBtn.classList.remove("active");
+});
 
 // ----------------------------------------------------
-
