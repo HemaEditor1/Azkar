@@ -2,6 +2,11 @@
 let infoBtn = document.querySelectorAll(".infoBtn");
 let sourceHidden = document.querySelectorAll(".sourceHidden");
 let doneBtn = document.querySelectorAll(".doneBtn");
+let whiteBoard = document.querySelector(".whiteBoard")
+
+setTimeout(() => {
+  closeWhiteBoard()
+}, 1000);
 
 for (let g = 0; g < infoBtn.length; g++) {
   infoBtn[g].onclick = function () {
@@ -31,12 +36,18 @@ for (let g = 0; g < infoBtn.length; g++) {
 
 // ------------------------------------------------------------- FUNCTIONS
 
+function closeWhiteBoard() {
+  whiteBoard.classList.add("close")
+}
+
+
 function toggleMenuElements() {
   menuElements.classList.toggle("show");
   menuBtn.classList.toggle("close");
   menuBtnX.classList.toggle("show");
   blackMate.classList.toggle("close");
 }
+
 
 // ------------------------------------------------------------- FUNCTIONS
 

@@ -27,6 +27,10 @@ window.onload = function () {
   }, 2000);
 };
 
+setTimeout(() => {
+  closeWhiteBoard()
+}, 1000);
+
 // ----------------------------------------------------------
 
 // -------------------------------------------------------- Numbers Of Azkar
@@ -143,6 +147,11 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
 let downBtn = document.querySelector(".downBtn")
 let upBtn = document.querySelector(".upBtn")
 let linksMoreZekr = document.querySelector(".linksMoreZekr")
+let whiteBoard = document.querySelector(".whiteBoard")
+
+function closeWhiteBoard() {
+  whiteBoard.classList.add("close")
+}
 
 function dayAzkar() {
   downBtn.classList.remove("night")

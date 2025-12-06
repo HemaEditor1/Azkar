@@ -47,6 +47,23 @@ body {
   background-image: url(Elements/Background/bk\ -\ h&f\ -\ night.png);
 }
 
+.whiteBoard {
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 999;
+  opacity: 1;
+  transition: 0.5s ease;
+}
+
+.whiteBoard.close {
+  opacity: 0;
+  z-index: -1;
+}
+
 .blackMate {
   display: flex;
   position: fixed;
