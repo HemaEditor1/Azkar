@@ -492,6 +492,7 @@ span.deactive {
   transform: translateY(-50px);
 }
 
+/* alert*/
 .doneBtn {
   opacity: 1;
   font-size: 1.1rem;
@@ -705,12 +706,12 @@ span.deactive {
   align-items: center;
   justify-content: center;
   color: #256358;
-  font-size: 1.2rem;
+  font-size: 1rem;
   height: 50px;
   border-radius: 5px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
   width: 70%;
-  top: 1.4%;
+  top: 2%;
   transform: translateY(0%);
   transition: 0.2s ease;
   gap: 3px;
