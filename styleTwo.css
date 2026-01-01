@@ -79,12 +79,14 @@ body {
 }
 
 .footer h2 {
+  font-size: 1.4rem;
   margin: 0;
   color: white;
   margin-top: 3vh;
 }
 
 .footer h3 {
+  font-size: 1.2rem;
   margin-top: 0.1vh;
   margin-bottom: 3vh;
 }
