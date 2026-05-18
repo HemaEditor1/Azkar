@@ -3,11 +3,11 @@ let switchBtnNight = document.querySelector(".theSwitshBtnNight");
 let azkarDay = document.querySelector(".Azkar.Day");
 let azkarNight = document.querySelector(".Azkar.Night");
 
-setTimeout(() => {
-  closeWhiteBoard();
-}, 1000);
-
 let timeNow = new Date();
+let timings;
+
+// ==============================================
+
 let dayTime = new Date();
 dayTime.setHours(5, 0, 0, 0);
 
@@ -20,8 +20,6 @@ let moreZekrArr = [...moreZekr];
 let textForMoreAzkar = document.querySelector(".knowMoreAzkar");
 let index = timeNow.getDate() % moreZekrArr.length;
 let moreAzkarLastPage = `هل تعرف <a href="${moreZekrArr[index].href}">${moreZekrArr[index].innerHTML}</a> ؟`;
-
-// ----------------------------------------------------------
 
 // ----------------------------------------------------------
 
@@ -197,101 +195,111 @@ function nightAzkar() {
 // Day Button
 switchBtnDay.onclick = function () {
   dayAzkar();
-  window.localStorage.setItem("User Choice", "اذكار الصباح");
-  window.localStorage.removeItem("Azkar Night");
-  window.localStorage.setItem("Hours", timeNow.getHours());
 };
 
 // Night Button
 switchBtnNight.onclick = function () {
   nightAzkar();
-  window.localStorage.setItem("User Choice", "اذكار المساء");
-  window.localStorage.setItem("Hours", timeNow.getHours());
 };
 
 // -------------------------------------------------------------------- Onload Window
 
-// window.onload = function () {
-//   addBlack();
-//   setTimeout(() => {
-//     closeBlack();
-//   }, 2000);
-// };
-
 // Onload Window Default (Azkar Day) After Fajr Time
 window.onload = function () {
-  // User Choice Remove Values
-  if (Number(window.localStorage.getItem("Hours")) !== timeNow.getHours()) {
-    window.localStorage.removeItem("User Choice");
-    window.localStorage.removeItem("Hours");
-  } else {
-    console.log("User Choice");
-  }
+  fetch(
+    `https://api.aladhan.com/v1/timingsByCity/${timeNow.getDate()}-${timeNow.getMonth() + 1}-${timeNow.getFullYear()}?city=cairo&country=egypt&method=8`,
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      timings = data.data.timings;
 
-  // Reset Azkar Values
-  if (window.localStorage.getItem("Date")) {
-    if (Number(window.localStorage.getItem("Date")) !== timeNow.getDate()) {
-      window.localStorage.removeItem("User Choice");
-
-      for (r = 0; r < allButtonsArr.length; r++) {
-        window.localStorage.removeItem(`Read Zekr ${r + 1}`);
-      }
-      window.localStorage.removeItem("Azkar Day");
-      window.localStorage.removeItem("Azkar Night");
-
-      // To Set Default Values of Azkar Read
-      if (window.localStorage.getItem("Page Is Ready")) {
-        console.log("Page Is Ready");
-      } else {
-        location.reload();
-        window.localStorage.setItem("Page Is Ready", "Done");
-      }
-
-      // اعرض اللينك
-      textForMoreAzkar.innerHTML = moreAzkarLastPage;
-
-      setTimeout(() => {
-        window.localStorage.removeItem("Page Is Ready");
-
-        // Add Date Value To Local Storage
-        window.localStorage.setItem("Date", timeNow.getDate());
-      }, 1000);
-    } else {
-      console.log("Same Date");
-
-      // اعرض اللينك
-      textForMoreAzkar.innerHTML = moreAzkarLastPage;
-    }
-  } else {
-    // Add Date Value To Local Storage For The First Time
-    window.localStorage.setItem("Date", timeNow.getDate());
-  }
-
-  // User Choice Callback Values
-  if (window.localStorage.getItem("User Choice")) {
-    if (window.localStorage.getItem("User Choice") === "اذكار الصباح") {
-      dayAzkar();
-    } else if (window.localStorage.getItem("User Choice") === "اذكار المساء") {
-      nightAzkar();
-    }
-  } else {
-    // Set TimeZone of Azkar
-    // Azkar Night
-    if (
-      timeNow.getHours() <= dayTime.getHours ||
-      timeNow.getHours() >= nightTime.getHours()
-    ) {
-      nightAzkar();
-
-      // Azkar Day
-    } else if (
-      timeNow.getHours() > dayTime.getHours() &&
-      timeNow.getHours() < nightTime.getHours()
-    ) {
-      dayAzkar();
-    }
-  }
+      startApp();
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
 };
+
+// ============================================
+
+function startApp() {
+  // ============================================
+  // Time Values
+
+  let fajrTime = timings.Fajr.replace(":", "").padStart(4, "0");
+
+  let asrTime = timings.Asr.replace(":", "").padStart(4, "0");
+
+  let timeNowIs = (
+    `${timeNow.getHours()}` + `${timeNow.getMinutes()}`
+  ).padStart(4, "0");
+
+  // ============================================
+  // Reset Azkar At Fajr
+
+  let today = new Date().toDateString();
+
+  if (Number(window.localStorage.getItem("Date")) !== timeNow.getDate()) {
+    // ============================================
+    // Reset Morning Azkar
+    // ============================================
+
+    for (let r = 0; r < indexOfLastDayZekr + 1; r++) {
+      window.localStorage.removeItem(`Read Zekr ${r + 1}`);
+    }
+
+    // ============================================
+    // Reset Night Azkar
+    // ============================================
+
+    for (let y = 0; y < indexOfLastNightZekr + 1; y++) {
+      window.localStorage.removeItem(`Read Zekr ${y + 1}`);
+    }
+
+    // ============================================
+    // Save New Date
+    // ============================================
+
+    window.localStorage.setItem("Date", timeNow.getDate());
+
+    // ============================================
+    // Reload One Time
+    // ============================================
+
+    if (!window.localStorage.getItem("Reload")) {
+      window.localStorage.setItem("Reload", "Done");
+
+      location.reload();
+    }
+  } else {
+    // نفس اليوم
+    // شيل علامة الريلود
+
+    window.localStorage.removeItem("Reload");
+  }
+
+  // ============================================
+  // Auto Detect Azkar
+
+  if (
+    Number(timeNowIs) >= Number(asrTime) ||
+    Number(timeNowIs) < Number(fajrTime)
+  ) {
+    nightAzkar();
+  } else {
+    dayAzkar();
+  }
+
+  // ============================================
+  // Show Link
+
+  textForMoreAzkar.innerHTML = moreAzkarLastPage;
+
+  // ============================================
+  // Close Loading
+
+  closeWhiteBoard();
+}
 
 // -------------------------------------------------------------------- Onload Window
 
