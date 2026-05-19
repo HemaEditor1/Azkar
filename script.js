@@ -281,7 +281,7 @@ function startApp() {
 
   // ============================================
   // Close Loading
-  // closeWhiteBoard();
+  closeWhiteBoard();
 }
 
 // -------------------------------------------------------------------- Onload Window
