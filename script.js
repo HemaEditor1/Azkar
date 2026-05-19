@@ -235,37 +235,21 @@ function startApp() {
   ).padStart(4, "0");
 
   // ============================================
-  // Reset Azkar At Fajr
 
-  let today = new Date().toDateString();
-
+  // Reset All Azkar Counters
   if (Number(window.localStorage.getItem("Date")) !== timeNow.getDate()) {
-    // ============================================
-    // Reset Morning Azkar
-    // ============================================
-
-    for (let r = 0; r < indexOfLastDayZekr + 1; r++) {
+    for (r = 0; r < allButtonsArr.length; r++) {
       window.localStorage.removeItem(`Read Zekr ${r + 1}`);
     }
-
-    // ============================================
-    // Reset Night Azkar
-    // ============================================
-
-    for (let y = 0; y < indexOfLastNightZekr + 1; y++) {
-      window.localStorage.removeItem(`Read Zekr ${y + 1}`);
-    }
+    window.localStorage.removeItem("Azkar Day");
+    window.localStorage.removeItem("Azkar Night");
 
     // ============================================
     // Save New Date
-    // ============================================
-
     window.localStorage.setItem("Date", timeNow.getDate());
 
     // ============================================
     // Reload One Time
-    // ============================================
-
     if (!window.localStorage.getItem("Reload")) {
       window.localStorage.setItem("Reload", "Done");
 
@@ -297,8 +281,7 @@ function startApp() {
 
   // ============================================
   // Close Loading
-
-  // closeWhiteBoard();
+  closeWhiteBoard();
 }
 
 // -------------------------------------------------------------------- Onload Window
