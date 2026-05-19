@@ -18,6 +18,10 @@ whiteBoard #Quran {
   font-family: "Zain", sans-serif;
 }
 
+#Quran {
+  font-family: "Amiri", serif;
+}
+
 #Quran h3 {
   font-size: 3vh;
 }
@@ -380,7 +384,7 @@ span.deactive {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 2vh 3vh;
+  margin: 2vh 10vh;
 }
 
 .textBFooter {
@@ -883,6 +887,10 @@ span.deactive {
   .footer h3 {
     font-size: 0.7rem;
   }
+
+  .zekr {
+    margin: 2vh 4vh;
+  }
 }
 
 /* Tablets */
@@ -1003,6 +1011,10 @@ span.deactive {
   .footer h3 {
     font-size: 1.2rem;
   }
+
+  .zekr {
+    margin: 2vh 4vh;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1012,5 +1024,9 @@ span.deactive {
 
   .leftMenu {
     display: none;
+  }
+
+  .zekr {
+    margin: 2vh 4vh;
   }
 }
