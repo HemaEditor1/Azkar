@@ -8,11 +8,11 @@ let timings;
 
 // ==============================================
 
-let dayTime = new Date();
-dayTime.setHours(5, 0, 0, 0);
+// let dayTime = new Date();
+// dayTime.setHours(5, 0, 0, 0);
 
-let nightTime = new Date();
-nightTime.setHours(16, 30, 0, 0);
+// let nightTime = new Date();
+// nightTime.setHours(16, 30, 0, 0);
 
 // Azkar Last Page
 let moreZekr = document.getElementsByClassName("moreAzkar");
@@ -230,14 +230,21 @@ function startApp() {
 
   let asrTime = timings.Asr.replace(":", "").padStart(4, "0");
 
+  console.log(fajrTime);
+  console.log(asrTime);
+
   let timeNowIs = (
     `${timeNow.getHours()}` + `${timeNow.getMinutes()}`
   ).padStart(4, "0");
 
+  console.log(timeNowIs);
   // ============================================
 
   // Reset All Azkar Counters
-  if (Number(window.localStorage.getItem("Date")) !== timeNow.getDate()) {
+  if (
+    Number(window.localStorage.getItem("Date")) !== timeNow.getDate() &&
+    Number(timeNowIs) >= Number(fajrTime)
+  ) {
     for (r = 0; r < allButtonsArr.length; r++) {
       window.localStorage.removeItem(`Read Zekr ${r + 1}`);
     }
