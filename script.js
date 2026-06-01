@@ -8,20 +8,12 @@ let timings;
 
 // ==============================================
 
-// let dayTime = new Date();
-// dayTime.setHours(5, 0, 0, 0);
-
-// let nightTime = new Date();
-// nightTime.setHours(16, 30, 0, 0);
-
 // Azkar Last Page
 let moreZekr = document.getElementsByClassName("moreAzkar");
 let moreZekrArr = [...moreZekr];
 let textForMoreAzkar = document.querySelector(".knowMoreAzkar");
 let index = timeNow.getDate() % moreZekrArr.length;
 let moreAzkarLastPage = `هل تعرف <a href="${moreZekrArr[index].href}">${moreZekrArr[index].innerHTML}</a> ؟`;
-
-// ----------------------------------------------------------
 
 // -------------------------------------------------------- Numbers Of Azkar
 
@@ -112,8 +104,6 @@ for (let n = 0; n <= indexOfLastNightZekr; n++) {
       allButtonsArr[n].disabled = true;
       allButtonsArr[n].classList.add("deactive");
       allSpansArr[n].classList.add("deactive");
-
-      window.localStorage.setItem("Date", timeNow.getDate());
 
       if (allButtonsArr[n + 1]) {
         setTimeout(() => {
@@ -224,29 +214,30 @@ window.onload = function () {
 
 function startApp() {
   // ============================================
-  // Time Values
 
+  // Time Values
   let fajrTime = timings.Fajr.replace(":", "").padStart(4, "0");
 
   let asrTime = timings.Asr.replace(":", "").padStart(4, "0");
 
-  console.log(fajrTime);
-  console.log(asrTime);
+  // console.log(fajrTime);
+  // console.log(asrTime);
 
   let timeNowIs = (
     `${timeNow.getHours()}` + `${timeNow.getMinutes()}`
   ).padStart(4, "0");
 
-  console.log(timeNowIs);
+  // console.log(timeNowIs);
   // ============================================
 
   // Reset All Azkar Counters
   if (
     Number(window.localStorage.getItem("Date")) !== timeNow.getDate() &&
-    Number(timeNowIs) >= Number(fajrTime)
+    Number(timeNowIs) > Number(fajrTime)
   ) {
     for (r = 0; r < allButtonsArr.length; r++) {
       window.localStorage.removeItem(`Read Zekr ${r + 1}`);
+      // window.localStorage.setItem("Date", timeNow.getDate());
     }
     window.localStorage.removeItem("Azkar Day");
     window.localStorage.removeItem("Azkar Night");
@@ -270,7 +261,7 @@ function startApp() {
   }
 
   // ============================================
-  // Auto Detect Azkar
+  // Auto Show Azkar
 
   if (
     Number(timeNowIs) >= Number(asrTime) ||
