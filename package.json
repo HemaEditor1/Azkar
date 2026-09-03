@@ -1,9 +1,11 @@
 {
-  "name": "azkar-by-react",
+  "name": "Azkar",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://hemaeditor1.github.io/Azkar/",
   "scripts": {
+    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
